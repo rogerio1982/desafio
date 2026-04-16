@@ -14,12 +14,11 @@ Here's the application flow from the moment the user makes a request until the f
 • If it's a question about products, space, or purchase, the orchestrator triggers the corresponding agent (app/agents/), which can use the RAG module (rag/retriever.py) to retrieve information from the data files (data/).
 
 • If it's a voice request, it triggers the voice agent (app/agents/voice.py). 
+
 • If it's a human support request, it triggers the escalation agent.
 
 6. The agent processes the request, queries data if necessary, and returns a structured response.
-
 7. The orchestrator assembles the final response in JSON format, including message, channel (text, voice, escalation), intent, and session_id.
-
 8. The API returns this response to the user.
 
 In summary: User → API → Orchestrator → Intent classifier → Specialized agent (can use RAG/data) → Orchestrator → API → User.
