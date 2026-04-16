@@ -19,7 +19,7 @@ A production-ready multi-agent conversational AI for a 3D digital car showroom.
     - The system's voice channel, enabling real-time conversation via WebSocket.
 
 
-Here's the application flow from the moment the user makes a request until the final response:
+### To working
 
 1. User sends a request (e.g., POST /chat) with a message.
 2. The FastAPI API (app/api/server.py and router.py) receives the request.
