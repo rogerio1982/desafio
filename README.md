@@ -99,32 +99,3 @@ python tests/test_all_intents.py
 # Single HTTP request (server must be running)
 python tests/test_chat.py
 ```
-
-## Architecture
-
-```
-POST /chat
-    │
-    ▼
-Intent Classifier (keyword-first → GPT-4o-mini fallback)
-    │
-    ├── RAG: text-embedding-3-small semantic search over knowledge base files
-    │         (injected as context for Product Info, Space Analysis, Purchase Intent)
-    │
-    ▼
-OpenAI Agents SDK — Runner.run(specialist_agent, context + message)
-    ├── Product Info Agent    ──► vehicle_catalog.txt
-    ├── Space Analysis Agent  ──► showroom_layouts.txt
-    ├── Purchase Intent Agent ──► dealership_faq.txt  ──► (handoff) Escalation Agent
-    ├── Voice Agent           ──► OpenAI Realtime API (WebSocket session)
-    └── Escalation Agent      ──► Human handoff
-    │
-    ▼
-Structured JSON Response
-{
-  "message_agent": "...",
-  "channel": "text | voice | escalation",
-  "intent":   "Product Info | Space Analysis | Purchase Intent | Voice Request | Escalation",
-  "session_id": "..."
-}
-```
