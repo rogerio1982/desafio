@@ -11,17 +11,13 @@ A production-ready multi-agent conversational AI for a 3D digital car showroom.
 
 - **OpenAI Agents SDK (`openai-agents`):**
     - Multi-agent orchestration layer, making it easy to create, execute, and handoff between specialized agents.
-    - Uses components like `Agent`, `Runner`, and `FileSearchTool` for modularity and extensibility.
 
 - **OpenAI Vector Store + FileSearchTool:**
     - All Retrieval-Augmented Generation (RAG) is performed via semantic search on local or hosted embeddings.
-    - The `FileSearchTool` enables efficient search in large knowledge bases, integrating with OpenAI's Vector Store.
 
 - **OpenAI Realtime API (wss://api.openai.com/v1/realtime):**
     - The system's voice channel, enabling real-time conversation via WebSocket.
-    - You must have an OpenAI account with Realtime API access to use this feature.
 
-> **Note:** To use all features (especially voice), set your OpenAI API key and ensure you have access to the Realtime API.
 
 Here's the application flow from the moment the user makes a request until the final response:
 
