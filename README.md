@@ -19,7 +19,7 @@ A production-ready multi-agent conversational AI for a 3D digital car showroom.
     - The system's voice channel, enabling real-time conversation via WebSocket.
 
 
-### To working
+## Quick Start
 
 1. User sends a request (e.g., POST /chat) with a message.
 2. The FastAPI API (app/api/server.py and router.py) receives the request.
@@ -40,7 +40,6 @@ In summary: User → API → Orchestrator → Intent classifier → Specialized 
 
 
 
-## Quick Start
 
 ### 1. Prerequisites
 
