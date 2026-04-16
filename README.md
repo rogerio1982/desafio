@@ -4,13 +4,25 @@ A production-ready multi-agent conversational AI for a 3D digital car showroom.
 
 ## Stack
 
-| Layer | Technology |
-|---|---|
-| Runtime | Python 3.11+, fully async |
-| Agent orchestration | **OpenAI Agents SDK** (`openai-agents`) — `Agent`, `Runner`, `FileSearchTool`, `handoff` |
-| RAG retrieval | Local semantic search via `text-embedding-3-small` + **FileSearchTool** over OpenAI Vector Store |
-| Voice channel | **OpenAI Realtime API** (`wss://api.openai.com/v1/realtime`) with graceful fallback |
-| API server | FastAPI + Uvicorn |
+Here's the application flow from the moment the user makes a request until the final response:
+
+1. User sends a request (e.g., POST /chat) with a message.
+2. The FastAPI API (app/api/server.py and router.py) receives the request.
+3. The message is forwarded to the orchestrator (core/orchestrator.py), which centralizes the flow.
+4. The orchestrator calls the intent classifier (core/intents.py) to identify the type of user request (e.g., product information, layout, purchase, voice, or human assistance).
+5. Depending on the intent:
+• If it's a question about products, space, or purchase, the orchestrator triggers the corresponding agent (app/agents/), which can use the RAG module (rag/retriever.py) to retrieve information from the data files (data/).
+
+• If it's a voice request, it triggers the voice agent (app/agents/voice.py). 
+• If it's a human support request, it triggers the escalation agent.
+
+6. The agent processes the request, queries data if necessary, and returns a structured response.
+
+7. The orchestrator assembles the final response in JSON format, including message, channel (text, voice, escalation), intent, and session_id.
+
+8. The API returns this response to the user.
+
+In summary: User → API → Orchestrator → Intent classifier → Specialized agent (can use RAG/data) → Orchestrator → API → User.
 
 ## Architecture
 
