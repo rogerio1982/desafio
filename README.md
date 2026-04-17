@@ -26,6 +26,7 @@ A production-ready multi-agent conversational AI for a 3D digital car showroom.
 3. The message is forwarded to the orchestrator (core/orchestrator.py), which centralizes the flow.
 4. The orchestrator calls the intent classifier (core/intents.py) to identify the type of user request (e.g., product information, layout, purchase, voice, or human assistance).
 5. Depending on the intent:
+
 • If it's a question about products, space, or purchase, the orchestrator triggers the corresponding agent (app/agents/), which can use the RAG module (rag/retriever.py) to retrieve information from the data files (data/).
 
 • If it's a voice request, it triggers the voice agent (app/agents/voice.py). 
